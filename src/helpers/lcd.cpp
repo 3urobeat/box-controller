@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 24.08.2022 17:41:10
+ * Last Modified: 24.08.2022 18:54:27
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -49,6 +49,8 @@ void lcdPrint(const char *str)
 
 
 void centerPrint(const char *str, int row, bool callclearLine) {
+    if (callclearLine) clearLine(maxcol, row);
+
     //Calculate column
     int offset = maxcol - strlen(str);
     if (offset < 0) offset = 0; //set offset to 0 if it would be negative
