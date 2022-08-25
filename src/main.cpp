@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 25.08.2022 19:03:28
+ * Last Modified: 25.08.2022 21:59:13
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -23,7 +23,10 @@ const int maxcol = 20;
 const int maxrow = 4;
 char version[] = "v0.1.0";
 
-LiquidCrystal_PCF8574 lcd(0x27, maxcol, 4);
+LiquidCrystal_PCF8574 lcd(0x25, maxcol, 4);
+
+float current, average, peak;
+unsigned long lastReprint;
 
 
 //Setup stuff on poweron
@@ -41,12 +44,46 @@ void setup() {
 
     //Clear lcd when ready and enter loop()
     lcd.clear();
+    
 }
 
 
+/**
+ * Prints the current measurements every 100ms
+ */
+void printMeasurements() {
+
+    clearLine(maxcol, 3); //TODO: Only clear when necessary (printStaticWidth() will handle this)
+    lcd.setCursor(0, 3);
+    lcd.print((int) current); //cast to int because of measurement inaccuracy
+    lcd.print("Wh");
+
+    lcd.setCursor(6, 3);
+    lcd.print((int) average);
+    lcd.print("Wh");
+
+    lcd.setCursor(14, 3);
+    lcd.print((int) peak);
+    lcd.print("Wh");
+    
+}
+
+
+/**
+ * Measures every 10ms
+ */
 void loop() {
 
-    //int watt = (int) measurePower(); //cast to int because of measurement inaccuracy
+    //print power measurements
+    current = measureCurrentPower();
+    average = getAveragePower(current);
+    peak    = getPeakPower(current);
 
-    delay(500);
+    //print measurements to lcd every 100ms to avoid "display lag"
+    if (lastReprint + 250 <= millis()) {
+        printMeasurements();
+        lastReprint = millis();
+    }
+
+    delay(10);
 }
