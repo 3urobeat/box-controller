@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 25.08.2022 19:01:24
+ * Last Modified: 25.08.2022 21:43:44
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -21,4 +21,6 @@ void clearLine(int maxcol, int row);
 void lcdPrint(const char *str);
 void centerPrint(const char *str, int row, bool callclearLine);
 
-float measurePower();
+float measureCurrentPower();
+float getAveragePower(float measurement);
+float getPeakPower(float measurement);
