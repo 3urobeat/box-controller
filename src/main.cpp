@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 24.08.2022 17:45:19
+ * Last Modified: 25.08.2022 19:03:28
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -45,6 +45,8 @@ void setup() {
 
 
 void loop() {
+
+    //int watt = (int) measurePower(); //cast to int because of measurement inaccuracy
 
     delay(500);
 }
