@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 25.08.2022 21:59:13
+ * Last Modified: 25.08.2022 23:43:25
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -23,7 +23,7 @@ const int maxcol = 20;
 const int maxrow = 4;
 char version[] = "v0.1.0";
 
-LiquidCrystal_PCF8574 lcd(0x25, maxcol, 4);
+LiquidCrystal_PCF8574 lcd(0x26, maxcol, 4);
 
 float current, average, peak;
 unsigned long lastReprint;
@@ -56,15 +56,15 @@ void printMeasurements() {
     clearLine(maxcol, 3); //TODO: Only clear when necessary (printStaticWidth() will handle this)
     lcd.setCursor(0, 3);
     lcd.print((int) current); //cast to int because of measurement inaccuracy
-    lcd.print("Wh");
+    lcd.print("W");
 
     lcd.setCursor(6, 3);
     lcd.print((int) average);
-    lcd.print("Wh");
+    lcd.print("W");
 
     lcd.setCursor(14, 3);
     lcd.print((int) peak);
-    lcd.print("Wh");
+    lcd.print("W");
     
 }
 
