@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 06.09.2022 17:21:40
+ * Last Modified: 06.09.2022 21:07:52
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -18,6 +18,8 @@
 #include <Wire.h>
 #include <NoiascaLiquidCrystal.h> // Article (german): https://werner.rothschopf.net/202003_arduino_liquid_crystal_umlaute.htm | Direct download: https://werner.rothschopf.net/2020/NoiascaLiquidCrystal.zip
 #include <lcdHelper.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
 #include "helpers/helpers.h"
 
 const int maxcol = 20;
@@ -26,7 +28,11 @@ char version[] = "v0.1.0";
 
 lcdHelper<LiquidCrystal_PCF8574> lcd(0x27, maxcol, 4);
 
-float current, average, peak;
+OneWire oneWire(2); // temp sensor is connected to pin D2
+DallasTemperature sensors(&oneWire);
+
+
+float temp, current, average, peak;
 unsigned long lastReprint;
 
 
@@ -54,9 +60,16 @@ void setup() {
  */
 void printMeasurements() {
 
-    // Print power measurements, give each value 5 chars on the display plus 1 char for the unit
     char buf[6] = "";
 
+    // Print temp measurement
+    sensors.requestTemperatures();
+
+    lcd.setCursor(0, 2);
+    lcd.alignedPrint("right", dtostrf(sensors.getTempCByIndex(0), 4, 3, buf), 4);
+    lcd.print("°C");
+
+    // Print power measurements, give each value 5 chars on the display plus 1 char for the unit
     lcd.setCursor(0, 3);
     lcd.alignedPrint("right", itoa((int) current, buf, 10), 5); //cast to int because of measurement inaccuracy
     lcd.print("W");
@@ -77,7 +90,7 @@ void printMeasurements() {
  */
 void loop() {
 
-    //print power measurements
+    // get power measurements
     current = measureCurrentPower();
     average = getAveragePower(current);
     peak    = getPeakPower(current);
