@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 06.09.2022 17:04:27
+ * Last Modified: 06.09.2022 17:21:40
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -54,17 +54,19 @@ void setup() {
  */
 void printMeasurements() {
 
-    lcd.clearLine(3); //TODO: Only clear when necessary (printStaticWidth() will handle this)
+    // Print power measurements, give each value 5 chars on the display plus 1 char for the unit
+    char buf[6] = "";
+
     lcd.setCursor(0, 3);
-    lcd.print((int) current); //cast to int because of measurement inaccuracy
+    lcd.alignedPrint("right", itoa((int) current, buf, 10), 5); //cast to int because of measurement inaccuracy
     lcd.print("W");
 
-    lcd.setCursor(6, 3);
-    lcd.print((int) average);
+    lcd.setCursor(7, 3);
+    lcd.alignedPrint("right", itoa((int) average, buf, 10), 5); 
     lcd.print("W");
 
     lcd.setCursor(14, 3);
-    lcd.print((int) peak);
+    lcd.alignedPrint("right", itoa((int) peak, buf, 10), 5); 
     lcd.print("W");
     
 }
