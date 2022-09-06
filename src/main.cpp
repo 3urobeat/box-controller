@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 25.08.2022 23:43:25
+ * Last Modified: 06.09.2022 17:04:27
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -17,13 +17,14 @@
 
 #include <Wire.h>
 #include <NoiascaLiquidCrystal.h> // Article (german): https://werner.rothschopf.net/202003_arduino_liquid_crystal_umlaute.htm | Direct download: https://werner.rothschopf.net/2020/NoiascaLiquidCrystal.zip
+#include <lcdHelper.h>
 #include "helpers/helpers.h"
 
 const int maxcol = 20;
 const int maxrow = 4;
 char version[] = "v0.1.0";
 
-LiquidCrystal_PCF8574 lcd(0x26, maxcol, 4);
+lcdHelper<LiquidCrystal_PCF8574> lcd(0x27, maxcol, 4);
 
 float current, average, peak;
 unsigned long lastReprint;
@@ -38,8 +39,8 @@ void setup() {
     lcd.backlight();
 
     //Print startup screen
-    centerPrint("Box Controller", 0, true);
-    centerPrint(version, 1, true);
+    lcd.centerPrint("Box Controller", 0, true);
+    lcd.centerPrint(version, 1, true);
     delay(500);
 
     //Clear lcd when ready and enter loop()
@@ -53,7 +54,7 @@ void setup() {
  */
 void printMeasurements() {
 
-    clearLine(maxcol, 3); //TODO: Only clear when necessary (printStaticWidth() will handle this)
+    lcd.clearLine(3); //TODO: Only clear when necessary (printStaticWidth() will handle this)
     lcd.setCursor(0, 3);
     lcd.print((int) current); //cast to int because of measurement inaccuracy
     lcd.print("W");

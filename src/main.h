@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 24.08.2022 17:41:14
+ * Last Modified: 06.09.2022 17:07:05
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -17,6 +17,7 @@
 
 #include <NoiascaLiquidCrystal.h>
 #include <NoiascaHW/lcd_PCF8574.h>
+#include <lcdHelper.h>
 
-extern LiquidCrystal_PCF8574 lcd;
+extern lcdHelper<LiquidCrystal_PCF8574> lcd;
 extern const int maxcol;
