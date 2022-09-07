@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 06.09.2022 17:07:05
+ * Last Modified: 07.09.2022 14:37:05
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -17,7 +17,13 @@
 
 #include <NoiascaLiquidCrystal.h>
 #include <NoiascaHW/lcd_PCF8574.h>
+#include <DallasTemperature.h>
 #include <lcdHelper.h>
 
-extern lcdHelper<LiquidCrystal_PCF8574> lcd;
 extern const int maxcol;
+extern lcdHelper<LiquidCrystal_PCF8574> lcd;
+extern DallasTemperature sensors;
+extern float temp, current, average, peak;
+extern DeviceAddress addr;
+
+void printMeasurements();
