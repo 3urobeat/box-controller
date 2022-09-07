@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 06.09.2022 21:07:52
+ * Last Modified: 07.09.2022 14:18:53
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -35,6 +35,8 @@ DallasTemperature sensors(&oneWire);
 float temp, current, average, peak;
 unsigned long lastReprint;
 
+DeviceAddress addr; // store address of temp sensor here
+
 
 //Setup stuff on poweron
 void setup() {
@@ -47,9 +49,19 @@ void setup() {
     //Print startup screen
     lcd.centerPrint("Box Controller", 0, true);
     lcd.centerPrint(version, 1, true);
-    delay(500);
 
-    //Clear lcd when ready and enter loop()
+    // get address of temp sensor
+    sensors.begin();
+    sensors.getAddress(addr, 0); // save address of temp sensor 0 into addr to make accessing it faster
+    sensors.setResolution(addr, 9); // reduce resolution to speed up conversion (9 bits, 0.5°C is enough for our use case)
+    sensors.setWaitForConversion(false); // disable lib waiting for conversion (93ms) as we need to take measurements in between
+
+    // get first temp reading so it will be ready when printMeasurements() is called for the first time
+    sensors.requestTemperaturesByAddress(addr);
+    temp = sensors.getTempC(addr);
+
+    // Clear lcd when ready and enter loop()
+    delay(5000); // at least wait 1000 ms for getTempC() to be done
     lcd.clear();
     
 }
@@ -63,11 +75,13 @@ void printMeasurements() {
     char buf[6] = "";
 
     // Print temp measurement
-    sensors.requestTemperatures();
-
     lcd.setCursor(0, 2);
-    lcd.alignedPrint("right", dtostrf(sensors.getTempCByIndex(0), 4, 3, buf), 4);
+    lcd.alignedPrint("right", dtostrf(temp, 4, 3, buf), 4); // use getTempC() instead of getTempCByIndex() as it is too slow
     lcd.print("°C");
+
+    // get new measurement which will be ready when this function is called the next time
+    sensors.requestTemperaturesByAddress(addr); // only get temp for this specific sensor as it is faster than calling requestTemperatures()
+    temp = sensors.getTempC(addr);              // get temp by addr instead of 
 
     // Print power measurements, give each value 5 chars on the display plus 1 char for the unit
     lcd.setCursor(0, 3);
