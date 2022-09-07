@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 07.09.2022 14:18:53
+ * Last Modified: 07.09.2022 14:27:20
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -26,11 +26,10 @@ const int maxcol = 20;
 const int maxrow = 4;
 char version[] = "v0.1.0";
 
-lcdHelper<LiquidCrystal_PCF8574> lcd(0x27, maxcol, 4);
+lcdHelper<LiquidCrystal_PCF8574> lcd(0x26, maxcol, 4);
 
 OneWire oneWire(2); // temp sensor is connected to pin D2
 DallasTemperature sensors(&oneWire);
-
 
 float temp, current, average, peak;
 unsigned long lastReprint;
@@ -41,12 +40,12 @@ DeviceAddress addr; // store address of temp sensor here
 //Setup stuff on poweron
 void setup() {
 
-    //initiate display
+    // initiate display
     Wire.begin();
     lcd.begin();
     lcd.backlight();
 
-    //Print startup screen
+    // Print startup screen
     lcd.centerPrint("Box Controller", 0, true);
     lcd.centerPrint(version, 1, true);
 
@@ -63,6 +62,10 @@ void setup() {
     // Clear lcd when ready and enter loop()
     delay(5000); // at least wait 1000 ms for getTempC() to be done
     lcd.clear();
+
+    // Display title
+    lcd.home();
+    lcd.print("Box Ctrl");
     
 }
 
