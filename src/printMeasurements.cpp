@@ -4,7 +4,7 @@
  * Created Date: 07.09.2022 14:32:47
  * Author: 3urobeat
  * 
- * Last Modified: 07.09.2022 14:33:26
+ * Last Modified: 08.09.2022 12:13:13
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -16,6 +16,7 @@
 
 
 #include "main.h"
+#include "helpers/helpers.h"
 
 
 /**
@@ -23,7 +24,11 @@
  */
 void printMeasurements() {
 
-    char buf[6] = "";
+    char buf[9] = "";
+
+    // Display uptime
+    lcd.setCursor(maxcol - 8, 0);
+    lcd.alignedPrint("right", getUptime(buf), 8);
 
     // Print temp measurement
     lcd.setCursor(0, 2);
