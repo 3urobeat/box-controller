@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 07.09.2022 14:33:08
+ * Last Modified: 08.09.2022 13:45:22
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -24,7 +24,7 @@
 
 const int maxcol = 20;
 const int maxrow = 4;
-char version[] = "v0.1.0";
+char version[] = "v1.0.0";
 
 lcdHelper<LiquidCrystal_PCF8574> lcd(0x26, maxcol, 4);
 
