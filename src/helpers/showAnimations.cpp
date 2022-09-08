@@ -4,7 +4,7 @@
  * Created Date: 08.09.2022 13:54:48
  * Author: 3urobeat
  * 
- * Last Modified: 08.09.2022 23:00:46
+ * Last Modified: 08.09.2022 23:13:48
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -77,7 +77,7 @@ void showAnimations() {
             
         // First divider animation: Moving bar
         case 1:
-            if (moveOffset >= 40) {
+            if (moveOffset >= 41) {
                 moveOffset = 0;
                 reset++;
             }
