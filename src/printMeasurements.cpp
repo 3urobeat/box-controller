@@ -4,7 +4,7 @@
  * Created Date: 07.09.2022 14:32:47
  * Author: 3urobeat
  * 
- * Last Modified: 08.09.2022 12:13:13
+ * Last Modified: 08.09.2022 18:11:44
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -16,13 +16,15 @@
 
 
 #include "main.h"
-#include "helpers/helpers.h"
-
+#include "helpers/helpers.h"                               
 
 /**
  * Prints the current measurements every 100ms
  */
 void printMeasurements() {
+
+    // Run showAnimations helper
+    showAnimations();
 
     char buf[9] = "";
 

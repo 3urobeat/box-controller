@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 08.09.2022 13:30:27
+ * Last Modified: 08.09.2022 18:11:55
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -22,3 +22,5 @@ char* getUptime(char *dest);
 float measureCurrentPower();
 float getAveragePower(float measurement);
 float getPeakPower(float measurement);
+
+void showAnimations();

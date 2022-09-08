@@ -4,7 +4,7 @@
  * Created Date: 24.08.2022 17:39:34
  * Author: 3urobeat
  * 
- * Last Modified: 08.09.2022 13:45:22
+ * Last Modified: 08.09.2022 22:21:36
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -32,7 +32,7 @@ OneWire oneWire(2); // temp sensor is connected to pin D2
 DallasTemperature sensors(&oneWire);
 
 float temp, current, average, peak;
-unsigned long lastReprint;
+unsigned long lastReprint, lastAnimationSwitch;
 
 DeviceAddress addr; // store address of temp sensor here
 
@@ -66,6 +66,8 @@ void setup() {
     // Display title
     lcd.home();
     lcd.print("Box Ctrl");
+
+    lastAnimationSwitch = millis();
     
 }
 
