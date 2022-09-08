@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 05.09.2022 19:13:18
+ * Last Modified: 08.09.2022 12:41:13
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -67,6 +67,15 @@ public:
      * Better strlen function to correctly count chars that are two bytes long (like ä ö or ü)
      */
     size_t utf8_strlen(const char *str);
+
+    /**
+     * Converts num to char array and precedes it with zeroes to match length.
+     * Make sure buf is at least len bytes long!
+     * @param dest Destination char array
+     * @param num The number to convert
+     * @param len The length the resulting char array will have. Zeroes will be added infront of num until it matches this length
+     */
+    char* toFixedLengthNumber(char *dest, int num, uint8_t len);
 
 private:
 

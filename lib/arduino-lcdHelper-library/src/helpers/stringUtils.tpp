@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 23:42:19
  * Author: 3urobeat
  * 
- * Last Modified: 29.08.2022 00:16:55
+ * Last Modified: 08.09.2022 12:44:03
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -15,13 +15,26 @@
  */
 
 
-/**
- * Better strlen function to correctly count chars that are two bytes long (like ä ö or ü)
- * Credit: https://forum.arduino.cc/t/frage-zu-chararray-strlen-und-umlaut/897224/12 and https://stackoverflow.com/a/4063229
- */
 template <typename lcd>
 size_t lcdHelper<lcd>::utf8_strlen(const char *str) {
+    
     int len = 0;
     while (*str) len += (*str++ & 0xc0) != 0x80;
     return len;
+
+}
+
+
+template <typename lcd>
+char* lcdHelper<lcd>::toFixedLengthNumber(char *dest, int num, uint8_t len) {
+
+    char numStr[len + 1] = ""; // no real way to check how long num will be so let's just use len as it will always be >=
+
+    itoa(num, numStr, 10); // convert int and save into numStr
+
+    memset(dest, '0', len - strlen(numStr)); // set all chars except the ones used by numStr to 0 (not \0 kek)
+    strcat(dest, numStr); // finally add the number itself to the end
+
+    return dest; // return pointer to dest again to make using the function inside another call easier
+
 }
