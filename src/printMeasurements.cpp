@@ -4,7 +4,7 @@
  * Created Date: 07.09.2022 14:32:47
  * Author: 3urobeat
  * 
- * Last Modified: 09.09.2022 17:22:06
+ * Last Modified: 09.09.2022 17:33:31
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -67,7 +67,7 @@ void printMeasurements() {
 
     if (showPeak) {
         lcd.alignedPrint("right", itoa((int) peak, buf, 10), 5); 
-        lcd.print("W");
+        lcd.print("W ");
     } else {
         lcd.alignedPrint("right", dtostrf(powerConsumed, 4, 3, buf), 5);
         lcd.print("Wh");
