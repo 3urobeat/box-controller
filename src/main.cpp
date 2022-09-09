@@ -24,7 +24,7 @@
 
 const int maxcol = 20;
 const int maxrow = 4;
-char version[] = "v1.0.0";
+char version[] = "v1.1.0";
 
 lcdHelper<LiquidCrystal_PCF8574> lcd(0x26, maxcol, 4);
 
@@ -60,7 +60,7 @@ void setup() {
     temp = sensors.getTempC(addr);
 
     // Clear lcd when ready and enter loop()
-    delay(5000); // at least wait 1000 ms for getTempC() to be done
+    delay(2500); // at least wait 1000 ms for getTempC() to be done
     lcd.clear();
 
     // Display title
