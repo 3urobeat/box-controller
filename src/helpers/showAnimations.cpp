@@ -4,7 +4,7 @@
  * Created Date: 08.09.2022 13:54:48
  * Author: 3urobeat
  * 
- * Last Modified: 08.09.2022 23:13:48
+ * Last Modified: 09.09.2022 17:01:57
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -21,6 +21,8 @@ uint8_t activeAnimation = 9; // tracks current animation. Start with something i
 uint8_t repetition = 0;      // tracks repeated calls of the same animation
 uint8_t reset = 0;           // tracks resets (moveOffset to 0) of an animation
 uint8_t moveOffset = 0;      // tracks offset of moving string
+
+bool blinkOn = false; // track blinking of temperature
 
 // List of animations
 const char titleAnimation1[9][9] = { "box ctrl", "bOx ctrl", "boX ctrl", "box ctrl", "box Ctrl", "box cTrl", "box ctRl", "box ctrL", "box ctrl" };
@@ -105,10 +107,25 @@ void showAnimations() {
             break;
 
         // TODO: Second divider animation, Maybe use movingPrint center to sides animation?
-
-        // Nothing to do here
-        default:
-            return;
     }
 
+
+    // show temp with blinking animation if temp >=35
+    if (temp >= 40) {
+        if (repetition % 2 == 1) return; // only update every 500ms
+
+        char buf[6] = "";
+        lcd.setCursor(0, 2);
+
+        if (blinkOn) {
+            lcd.print("        ");
+        } else {
+            lcd.print("! ");
+            lcd.print(dtostrf(temp, 4, 1, buf));
+            lcd.print("°C  ");
+        }
+
+        blinkOn = !blinkOn;
+    }
+    
 }
