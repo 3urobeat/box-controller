@@ -4,7 +4,7 @@
  * Created Date: 25.08.2022 18:54:22
  * Author: 3urobeat
  * 
- * Last Modified: 25.08.2022 21:53:53
+ * Last Modified: 09.09.2022 17:24:58
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -17,9 +17,8 @@
 
 #include "helpers.h"
 
-
-float averagePower = 0;
-float peakPower    = 0;
+float averagePower  = 0;
+float peakPower     = 0;
 
 
 /**
@@ -27,12 +26,15 @@ float peakPower    = 0;
  */
 float measureCurrentPower() {
 
-    float readout = analogRead(A0); //read measurement from pin A0
+    float readout = analogRead(A0); // read measurement from pin A0
 
     float voltage = (readout * 5.015) / 1024;
-    float current = (voltage - 2.5124) * 66.666; //-2.5124 offset (will now correctly display 0.00 idle)
+    float current = (voltage - 2.5124) * 66.666; // -2.5124 offset (will now correctly display 0.00 idle)
+    float power = current * 12; // current * 12 because Vcc 12V
+
+    powerConsumed += (power * 0.01) / 3600;
     
-    return current * 12; //current * 12 because Vcc 12V
+    return power;
 
 }
 

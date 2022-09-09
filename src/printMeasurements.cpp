@@ -4,7 +4,7 @@
  * Created Date: 07.09.2022 14:32:47
  * Author: 3urobeat
  * 
- * Last Modified: 09.09.2022 17:01:29
+ * Last Modified: 09.09.2022 17:22:06
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -17,6 +17,9 @@
 
 #include "main.h"
 #include "helpers/helpers.h"
+
+unsigned long lastPeakFlip = millis();
+bool showPeak = true;
 
 /**
  * Prints the current measurements every 100ms
@@ -50,12 +53,24 @@ void printMeasurements() {
     lcd.alignedPrint("right", itoa((int) current, buf, 10), 5); //cast to int because of measurement inaccuracy
     lcd.print("W");
 
-    lcd.setCursor(7, 3);
+    lcd.setCursor(6, 3);
     lcd.alignedPrint("right", itoa((int) average, buf, 10), 5); 
     lcd.print("W");
 
-    lcd.setCursor(14, 3);
-    lcd.alignedPrint("right", itoa((int) peak, buf, 10), 5); 
-    lcd.print("W");
+    
+    if (millis() - lastPeakFlip > 5000) {
+        showPeak = !showPeak; // flip between peak and power consumption since turn on every 5 sec
+        lastPeakFlip = millis();
+    }
+    
+    lcd.setCursor(13, 3);
+
+    if (showPeak) {
+        lcd.alignedPrint("right", itoa((int) peak, buf, 10), 5); 
+        lcd.print("W");
+    } else {
+        lcd.alignedPrint("right", dtostrf(powerConsumed, 4, 3, buf), 5);
+        lcd.print("Wh");
+    }
     
 }
