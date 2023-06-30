@@ -29,14 +29,14 @@ Furthermore the title and divider row cycle through a few simple animations:
 ## Pictures:
 Display and side with controls:  
 <div>
-  <img width=45% height:auto src="https://raw.githubusercontent.com/HerrEurobeat/box-controller/main/.github/img/display.JPG">  
-  <img align="right" width=45% height:auto src="https://raw.githubusercontent.com/HerrEurobeat/box-controller/main/.github/img/side.JPG">  
+  <img width=45% height:auto src="https://raw.githubusercontent.com/3urobeat/box-controller/main/.github/img/display.JPG">  
+  <img align="right" width=45% height:auto src="https://raw.githubusercontent.com/3urobeat/box-controller/main/.github/img/side.JPG">  
 </div>
 
 &nbsp;
 
 Front and back (open, without backplate):  
 <div>
-  <img width=45% height:auto src="https://raw.githubusercontent.com/HerrEurobeat/box-controller/main/.github/img/front.JPG">  
-  <img align="right" width=45% height:auto src="https://raw.githubusercontent.com/HerrEurobeat/box-controller/main/.github/img/back.JPG">  
+  <img width=45% height:auto src="https://raw.githubusercontent.com/3urobeat/box-controller/main/.github/img/front.JPG">  
+  <img align="right" width=45% height:auto src="https://raw.githubusercontent.com/3urobeat/box-controller/main/.github/img/back.JPG">  
 </div>
